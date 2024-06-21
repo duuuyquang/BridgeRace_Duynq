@@ -12,6 +12,8 @@ public class Character : MonoBehaviour
     public const string ANIM_NAME_IDLE   = "idle";
     public const string ANIM_NAME_FALL   = "fall";
 
+    protected const float FALLING_SPEED  = 100f;
+
     [SerializeField] private CharacterBrick characterBrickPrefab;
     [SerializeField] private Transform brickHolder;
     [SerializeField] protected Renderer characterRenderer;
@@ -28,12 +30,12 @@ public class Character : MonoBehaviour
     protected List<Vector3> allBricksPos = new List<Vector3>();
     protected List<Vector3> collectedPos = new List<Vector3>();
     protected Stage stage;
+    protected float fallingSpeed = FALLING_SPEED;
 
     public ColorType ColorType { get { return colorType; } set { colorType = value; } }
     public float speed;
     public int CurBrick => brickStacks.Count;
     public virtual bool IsMovingBack => PlayerController.Instance.CurDir.z < 0;
-
     public Transform TF { get { return tf; } }
 
     public virtual void OnInit()
@@ -47,7 +49,7 @@ public class Character : MonoBehaviour
         Destroy(transform.gameObject);
     }
 
-    protected void ChangeColor(ColorType type)
+    public void ChangeColor(ColorType type)
     {
         //TODO: FIX
         //characterRenderer.material.color = DataByType.Colors[(int)type];

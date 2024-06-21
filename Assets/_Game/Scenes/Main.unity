@@ -994,11 +994,7 @@ MonoBehaviour:
   - {fileID: 4366678829552598048, guid: d7a9f3f5a696f4f44aef2516d52a00cf, type: 3}
   - {fileID: 4366678829552598048, guid: daaf3c76049b04843a0b25867fc31d8d, type: 3}
   player: {fileID: 3000383239559906527}
-  botPrefabs:
-  - {fileID: 617923210347668752, guid: f7363985e34d78645b664e29e3a51932, type: 3}
-  - {fileID: 1251479904270631889, guid: 9135b6466a1a8bc49baba783efe9bd2c, type: 3}
-  - {fileID: 6859102883282755325, guid: 156fb7e72ef03b14cabae4ddf6eb7323, type: 3}
-  - {fileID: 7525639066792877395, guid: 61e30d2978ccaee479292191877f9a51, type: 3}
+  botPrefab: {fileID: 7525639066792877395, guid: 7a8e209999fc17a49a35fe36c8eba3de, type: 3}
   initLevel: 1
 --- !u!4 &2091405609
 Transform:

@@ -59,7 +59,7 @@ public class Stage : MonoBehaviour
         {
             List<int> list = new List<int>();
 
-            int totalType = DataByType.COLOR_TYPE_END;
+            int totalType = LevelManager.Instance.TotalCharacters;
             totalEach = rowNum * colNum / totalType;
 
             List<int> countHolder = new List<int>();

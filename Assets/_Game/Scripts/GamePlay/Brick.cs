@@ -12,7 +12,7 @@ public class Brick : GameUnit
 
     public float speed;
     public ColorType Type { get { return type; } set { type = value; } }
-    private bool IsDestination => Vector3.Distance(collector.GetCurBrickHolderTopPos(height), TF.position) < 0.1f;
+    private bool IsDestination => Vector3.Distance(collector.GetCurBrickHolderTopPos(height), TF.position) < 0.5f;
 
     [SerializeField] protected ColorDataSO colorDataSO;
 

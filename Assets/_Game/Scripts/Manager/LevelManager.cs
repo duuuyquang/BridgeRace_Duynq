@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,17 +10,27 @@ public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField] Level[] levels;
     [SerializeField] Player player;
-    [SerializeField] List<Enemy> botPrefabs;
+    [SerializeField] Enemy botPrefab;
+
+    private List<ColorType> availableColors = new List<ColorType>();
+    private List<ColorType> shuffledColors = new List<ColorType>();
+    private List<Enemy> bots = new List<Enemy>();
+    private Level currentLevelObj;
+
     public int initLevel = 1;
 
-    private List<Enemy> bots = new List<Enemy>();
-
-    private Level currentLevelObj;
     public int CurrentLevel => currentLevelObj.Index;
 
     public int LevelMax => levels.Length - 1;
 
+    public int TotalCharacters => availableColors.Count;
+
     public Transform CurrentFinishPoint => currentLevelObj.finishPoint;
+
+    public void Awake()
+    {
+        PreloadAvailableColors();
+    }
 
     public void Start()
     {
@@ -29,7 +40,8 @@ public class LevelManager : Singleton<LevelManager>
 
     public void OnInit()
     {
-        player.OnInit();
+        ShuffleColors();
+        OnInitPlayer();
         OnInitBot();
     }
 
@@ -39,20 +51,51 @@ public class LevelManager : Singleton<LevelManager>
         Vector3 leftPlayer = player.TF.position + Vector3.left * 2;
         Vector3 rightPlayer = player.TF.position + Vector3.right * 2;
         Vector3 spawnPos = player.TF.position;
-        
-        foreach (Enemy enemy in botPrefabs) {
+
+        foreach (ColorType color in shuffledColors) {
             if (count%2 == 1)
             {
                 spawnPos += rightPlayer * count;
-            } 
+            }
             else
             {
                 spawnPos += leftPlayer * count;
             }
-            Enemy temp = Instantiate(enemy, spawnPos, Quaternion.identity);
+
+            botPrefab.ColorType = color;
+            Enemy temp = Instantiate(botPrefab, spawnPos, Quaternion.identity);
             bots.Add(temp);
             count++;
         }
+    }
+
+    public void PreloadAvailableColors()
+    {
+        if (availableColors.Count <= 0)
+        {
+            foreach (ColorType type in (ColorType[])Enum.GetValues(typeof(ColorType)))
+            {
+                if (type == ColorType.Clear || type == ColorType.Grey)
+                {
+                    continue;
+                }
+                availableColors.Add(type);
+            }
+        }
+    }
+
+    public void ShuffleColors()
+    {
+        shuffledColors.Clear();
+        shuffledColors = Utilities.ShuffleList(new List<ColorType>(availableColors));
+    }
+
+    public void OnInitPlayer()
+    {
+        ColorType type = shuffledColors[shuffledColors.Count - 1];
+        player.ColorType = type;
+        shuffledColors.Remove(type);
+        player.OnInit();
     }
 
     public void OnReset()
@@ -62,10 +105,10 @@ public class LevelManager : Singleton<LevelManager>
         {
             bots[i].OnDespawn();
         }
-
         bots.Clear();
-        OnInitBot();
         SimplePool.CollectAll();
+
+        OnInit();
     }
 
     public void OnLoadLevel(int level)

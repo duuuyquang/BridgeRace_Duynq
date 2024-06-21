@@ -18,7 +18,6 @@ public class Player : Character
 
     private bool isCollapsed = false;
     private float countCollapsedTime = 0;
-
     private Vector3 fallBackDir => (PlayerController.Instance.CurDir - TF.position).normalized;
 
     public override bool IsMovingBack => PlayerController.Instance.CurDir.z < 0;
@@ -59,7 +58,7 @@ public class Player : Character
     {
         if (isCollapsed)
         {
-            //StopMoving();
+            rb.velocity = -PlayerController.Instance.CurDir * (fallingSpeed--) * Time.fixedDeltaTime;
             ChangeAnim(ANIM_NAME_FALL);
             return;
         }
@@ -180,7 +179,6 @@ public class Player : Character
     IEnumerator IEOnCollapsed()
     {
         isCollapsed = true;
-        PlayerController.Instance.CurDir = Vector3.zero;
         ChangeColor(ColorType.Grey);
 
         while (brickStacks.Count > 0)
@@ -196,8 +194,8 @@ public class Player : Character
         }
         collectedPos.Clear();
 
-        //yield return new WaitForSeconds(.5f);
         isCollapsed = false;
-        ChangeColor(ColorType.Magenta);
+        fallingSpeed = FALLING_SPEED;
+        ChangeColor(ColorType);
     }
 }
