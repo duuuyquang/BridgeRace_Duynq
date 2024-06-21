@@ -11,6 +11,7 @@ public class CanvasFail : UICanvas
     {
         scoreText.text = score.ToString();
     }
+
     public void MainMenuButton()
     {
         UIManager.Instance.CloseAll();
@@ -23,10 +24,11 @@ public class CanvasFail : UICanvas
     public void RetryButton()
     {
         Close(0);
-        UIManager.Instance.OpenUI<CanvasGamePlay>();
+        UIManager.Instance.OpenUI<CanvasGamePlay>().UpdateLevelText(LevelManager.Instance.CurrentLevel);
         GameManager.Instance.OnInit();
         LevelManager.Instance.OnReset();
         LevelManager.Instance.OnLoadLevel(LevelManager.Instance.CurrentLevel);
         GameManager.ChangeState(GameState.GamePlay);
+        CameraFollower.Instance.SetupGamePlayMode();
     }
 }

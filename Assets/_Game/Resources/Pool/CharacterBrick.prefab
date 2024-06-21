@@ -110,7 +110,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.6, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9185561428185330692}
@@ -130,4 +130,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PoolType: 1
   brickRenderer: {fileID: 5896441953640543389}
-  ColorType: 0
+  colorDataSO: {fileID: 11400000, guid: f9459ca31df88ec49b1f86ad4a11b8de, type: 2}

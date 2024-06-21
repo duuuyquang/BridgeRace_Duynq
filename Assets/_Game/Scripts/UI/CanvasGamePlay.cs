@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class CanvasGamePlay : UICanvas
 {
-    [SerializeField] TextMeshProUGUI cointText;
+    [SerializeField] TextMeshProUGUI levelText;
 
     public override void Setup()
     {
         base.Setup();
     }
 
-    public void UpdateScore(int coin)
+    public void UpdateLevelText(int level)
     {
-        cointText.text = coin.ToString();
+        levelText.text = "Level " + level;
     }
 
     public void SettingsButton()

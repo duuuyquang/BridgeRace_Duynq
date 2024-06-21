@@ -9,7 +9,8 @@ public class IdleState : IState
     public void OnEnter(Enemy enemy)
     {
         time = Random.Range(0f, 3f);
-        enemy.StopMoving();
+        enemy.ResetPath();
+        enemy.ChangeAnim(Character.ANIM_NAME_IDLE);
     }
 
     public void OnExecute(Enemy enemy)

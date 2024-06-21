@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CanvasVictory : UICanvas
@@ -24,10 +25,18 @@ public class CanvasVictory : UICanvas
     public void NextButton()
     {
         Close(0);
-        UIManager.Instance.OpenUI<CanvasGamePlay>();
-        GameManager.Instance.OnInit();
-        GameManager.ChangeState(GameState.GamePlay);
         LevelManager.Instance.OnReset();
-        LevelManager.Instance.OnLoadLevel(LevelManager.Instance.CurrentLevel+1);
+        int nextLevel = LevelManager.Instance.CurrentLevel + 1;
+        if( nextLevel > LevelManager.Instance.LevelMax ) {
+            UIManager.Instance.OpenUI<CanvasInformation>();
+        } 
+        else
+        {
+            LevelManager.Instance.OnLoadLevel(nextLevel);
+            GameManager.Instance.OnInit();
+            GameManager.ChangeState(GameState.GamePlay);
+            CameraFollower.Instance.SetupGamePlayMode();
+            UIManager.Instance.OpenUI<CanvasGamePlay>().UpdateLevelText(LevelManager.Instance.CurrentLevel);
+        }
     }
 }
