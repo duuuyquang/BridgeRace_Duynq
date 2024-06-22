@@ -995,7 +995,7 @@ MonoBehaviour:
   - {fileID: 4366678829552598048, guid: daaf3c76049b04843a0b25867fc31d8d, type: 3}
   player: {fileID: 3000383239559906527}
   botPrefab: {fileID: 7525639066792877395, guid: 7a8e209999fc17a49a35fe36c8eba3de, type: 3}
-  initLevel: 1
+  initLevel: 3
 --- !u!4 &2091405609
 Transform:
   m_ObjectHideFlags: 0

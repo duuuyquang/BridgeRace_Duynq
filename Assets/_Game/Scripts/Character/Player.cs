@@ -15,9 +15,6 @@ public class Player : Character
     private float slopeAngle;
 
     private RaycastHit frontHit;
-
-    private bool isCollapsed = false;
-    private float countCollapsedTime = 0;
     private Vector3 fallBackDir => (PlayerController.Instance.CurDir - TF.position).normalized;
 
     public override bool IsMovingBack => PlayerController.Instance.CurDir.z < 0;
@@ -170,13 +167,14 @@ public class Player : Character
             StopMoving();
         }
 
-        if (TagManager.Compare(other.tag, TagManager.ENEMY) && !isCollapsed)
+        Character character = Cache.GenCharacters(other);
+        if (character && character.CurBrick >= CurBrick && CurBrick > 0)
         {
             StartCoroutine(IEOnCollapsed());
         }
     }
 
-    IEnumerator IEOnCollapsed()
+    private IEnumerator IEOnCollapsed()
     {
         isCollapsed = true;
         ChangeColor(ColorType.Grey);

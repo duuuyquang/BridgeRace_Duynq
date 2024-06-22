@@ -1846,7 +1846,7 @@ MonoBehaviour:
   brickPrefab: {fileID: 6713269301618310937, guid: bff3f5bee3c161f47b84c8637b04e97a, type: 3}
   spawnStartPos: {fileID: 7063658467039684888}
   rowNum: 10
-  colNum: 7
+  colNum: 6
 --- !u!65 &392240768538784130
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2160,7 +2160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   brickPrefab: {fileID: 6713269301618310937, guid: bff3f5bee3c161f47b84c8637b04e97a, type: 3}
   spawnStartPos: {fileID: 2842087637724539990}
-  rowNum: 15
+  rowNum: 12
   colNum: 8
 --- !u!65 &7220737384814638377
 BoxCollider:

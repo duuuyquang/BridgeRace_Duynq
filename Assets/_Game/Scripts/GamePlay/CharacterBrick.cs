@@ -20,17 +20,19 @@ public class CharacterBrick : GameUnit
 
     public void ProccessFalling()
     {
-        TF.position = Vector3.MoveTowards(TF.position, targetFallingPos, 6f * Time.deltaTime);
+        TF.position = Vector3.MoveTowards(TF.position, targetFallingPos, 8f * Time.deltaTime);
         if(IsDestination)
         {
             isFalling = false;
             OnDespawn();
+            Brick b = SimplePool.Spawn<Brick>(PoolType.Brick, targetFallingPos, Quaternion.identity);
+            b.OnInit(ColorType.Grey);
         }
     }
 
-    public void SetFalling()
+    public void SetFalling(Transform charPos)
     {
-        targetFallingPos = new Vector3(TF.position.x, -1, TF.position.z) + new Vector3(Random.Range(-4, 4), 0, Random.Range(-4, 4));
+        targetFallingPos = new Vector3(TF.position.x, charPos.position.y, TF.position.z) + new Vector3(Random.Range(-6, 6), 0, Random.Range(-6, 6));
         ChangeColor(ColorType.Grey);
         isFalling = true;
     }

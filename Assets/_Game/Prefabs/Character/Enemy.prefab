@@ -689,7 +689,7 @@ MonoBehaviour:
   brickHolder: {fileID: 1481403907403044714}
   characterRenderer: {fileID: 3247610996608439934}
   anim: {fileID: 5962188948402124073}
-  colorType: 0
+  colorType: 3
   startPoint: {x: 0, y: 0, z: 0}
   tf: {fileID: 7218736613010007351}
   brickHolderTF: {fileID: 1481403907403044714}

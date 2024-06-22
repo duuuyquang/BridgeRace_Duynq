@@ -30,6 +30,8 @@ public class Character : MonoBehaviour
     protected List<Vector3> allBricksPos = new List<Vector3>();
     protected List<Vector3> collectedPos = new List<Vector3>();
     protected Stage stage;
+
+    protected bool  isCollapsed = false;
     protected float fallingSpeed = FALLING_SPEED;
 
     public ColorType ColorType { get { return colorType; } set { colorType = value; } }
@@ -68,7 +70,7 @@ public class Character : MonoBehaviour
 
     public virtual bool IsAvailableToCollect()
     {
-        return true;
+        return !isCollapsed;
     }
 
     public void AddBrick()
@@ -97,7 +99,7 @@ public class Character : MonoBehaviour
     public void BrickFallAndRemove()
     {
         CharacterBrick brick = brickStacks[CurBrick - 1];
-        brick.SetFalling();
+        brick.SetFalling(TF);
         brickStacks.Remove(brick);
     }
 
@@ -118,8 +120,11 @@ public class Character : MonoBehaviour
     }
     public void RespawnLastCollectedBrick()
     {
-        stage.SpawnEachBrickByType(ColorType, collectedPos[collectedPos.Count - 1]);
-        collectedPos.Remove(collectedPos[collectedPos.Count - 1]);
+        if(collectedPos.Count > 0)
+        {
+            stage.SpawnEachBrickByType(ColorType, collectedPos[collectedPos.Count - 1]);
+            collectedPos.Remove(collectedPos[collectedPos.Count - 1]);
+        }
     }
 
     public void CacheCollectedPos(Vector3 position)

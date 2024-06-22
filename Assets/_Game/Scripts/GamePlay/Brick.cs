@@ -12,7 +12,7 @@ public class Brick : GameUnit
 
     public float speed;
     public ColorType Type { get { return type; } set { type = value; } }
-    private bool IsDestination => Vector3.Distance(collector.GetCurBrickHolderTopPos(height), TF.position) < 0.5f;
+    private bool IsDestination => Vector3.Distance(collector.GetCurBrickHolderTopPos(height), TF.position) < 0.3f;
 
     [SerializeField] protected ColorDataSO colorDataSO;
 
@@ -50,7 +50,10 @@ public class Brick : GameUnit
         Character character = Cache.GenCharacters(other);
         if (isCharacter && CheckValidType(character.ColorType) && character.IsAvailableToCollect())
         {
-            character.CacheCollectedPos(this.TF.position);
+            if(type != ColorType.Grey)
+            {
+                character.CacheCollectedPos(TF.position);
+            }
             collector = character;
             ////Destroy(transform.gameObject);
             //OnDespawn();
@@ -69,7 +72,7 @@ public class Brick : GameUnit
             {
                 collector.AddBrick();
             }
-            else
+            else if(type != ColorType.Grey)
             {
                 collector.RespawnLastCollectedBrick();
             }

@@ -53,14 +53,17 @@ public class Stage : MonoBehaviour
         b.OnInit(type);
     }
 
-    private List<int> PreloadTypeListToSpawn()
+    public List<int> PreloadTypeListToSpawn()
     {
-        if(cachedColorTypeList.Count <= 0)
+        if (cachedColorTypeList.Count <= 0)
         {
             List<int> list = new List<int>();
 
             int totalType = LevelManager.Instance.TotalCharacters;
-            totalEach = rowNum * colNum / totalType;
+            totalEach = (int)Mathf.Ceil((float) rowNum * colNum / totalType);
+
+            Debug.Log("stage " + this + " " +totalEach);
+            Debug.Log("count " + cachedColorTypeList.Count);
 
             List<int> countHolder = new List<int>();
             for (int i = 0; i <= totalType; i++)

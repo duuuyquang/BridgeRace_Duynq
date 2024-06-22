@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -28,7 +29,10 @@ public class Enemy : Character
 
     public void ResetPath()
     {
-        agent.ResetPath();
+        if(agent.isOnNavMesh)
+        {
+            agent.ResetPath();
+        }
     }
 
     private void Awake()
@@ -137,5 +141,35 @@ public class Enemy : Character
         {
             ChangeState(new IdleState());
         }
+
+        Character character = Cache.GenCharacters(other);
+        if (character && character.CurBrick > CurBrick && CurBrick > 0)
+        {
+            StartCoroutine(IEOnCollapsed());
+        }
+    }
+
+    private IEnumerator IEOnCollapsed()
+    {
+        isCollapsed = true;
+        ChangeColor(ColorType.Grey);
+        ChangeState(new CollapseState());
+        while (brickStacks.Count > 0)
+        {
+            BrickFallAndRemove();
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        while (collectedPos.Count > 0)
+        {
+            RespawnLastCollectedBrick();
+        }
+        collectedPos.Clear();
+
+        isCollapsed = false;
+        fallingSpeed = FALLING_SPEED;
+        ChangeColor(ColorType);
+        ChangeState(new SeekBrickState());
     }
 }

@@ -2153,9 +2153,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2302713616370494}
   - {fileID: 881565202543457009}
   - {fileID: 6077020481068766254}
-  - {fileID: 2302713616370494}
   - {fileID: 5712488157666012952}
   - {fileID: 1200238863247995305}
   - {fileID: 2155516967679274738}
@@ -2390,7 +2390,7 @@ MonoBehaviour:
   brickPrefab: {fileID: 0}
   spawnStartPos: {fileID: 7063658467039684888}
   rowNum: 10
-  colNum: 7
+  colNum: 6
 --- !u!65 &392240768538784130
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3247,7 +3247,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8937053508946604655}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
