@@ -62,9 +62,6 @@ public class Stage : MonoBehaviour
             int totalType = LevelManager.Instance.TotalCharacters;
             totalEach = (int)Mathf.Ceil((float) rowNum * colNum / totalType);
 
-            Debug.Log("stage " + this + " " +totalEach);
-            Debug.Log("count " + cachedColorTypeList.Count);
-
             List<int> countHolder = new List<int>();
             for (int i = 0; i <= totalType; i++)
             {
